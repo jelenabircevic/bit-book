@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import FeedPage from './FeedPage/FeedPage';
 import Header from './partials/Header'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header/>
-      </div>
+        <div>
+          <Header/>
+          <FeedPage/>
+        </div>
+      
     );
   }
 }
