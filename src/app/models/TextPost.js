@@ -26,6 +26,6 @@ export class PostText extends Post {
 export class PostImage extends Post {
     constructor(post) {
         super(post);
-        this.text = post.text;
+        this.imageUrl = post.imageUrl;
       }
   }

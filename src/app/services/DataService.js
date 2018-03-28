@@ -40,8 +40,7 @@ class FetchData{
                     }
                     
                 })
-
-               
+ 
             })
 
     }
