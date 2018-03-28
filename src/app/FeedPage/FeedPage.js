@@ -19,7 +19,7 @@ class FeedPage extends Component {
             modal: {
                 open: false
             },
-            data: []
+            reRender: false
         };
         this.addButtonOnClick = this.addButtonOnClick.bind(this);
         this.show = this.show.bind(this);
@@ -70,7 +70,7 @@ class FeedPage extends Component {
     modal() {
 
         return (
-            <Modal style={{ marginTop: 500, marginRight: "auto", marginBottom: "auto", marginLeft: "auto" }} size={"large"} open={this.state.modal.open} onClose={this.close}>
+            <Modal style={{ marginTop: 400, marginRight: "auto", marginBottom: "auto", marginLeft: "auto" }} size={"large"} open={this.state.modal.open} onClose={this.close}>
                 <Modal.Header>
                     {`New ${this.state.modal.type}Post`}
                 </Modal.Header>
@@ -89,7 +89,7 @@ class FeedPage extends Component {
         )
     }
 
-    sendTextPost() {
+    sendTextPost = () => {
         this.setState({
             modal:
                 { open: false },
@@ -99,8 +99,8 @@ class FeedPage extends Component {
             }
         });
         postData.postText(document.getElementById('textInput').value)
-            .then(response => {
-                this.setState({data: response})
+            .then(() => {
+                this.setState((prevState, props) => ({reRender: !prevState.reRender}))
             })
     }
 
@@ -121,7 +121,7 @@ render() {
             {this.addButton()}
             <div className="ui grid">
                 <div className="four wide column"></div>
-                <div className="eight wide column center aligned"><FeedList data={this.state.data}/></div>
+                <div className="eight wide column center aligned"><FeedList reRender={this.state.reRender}/></div>
                 <div className="four wide column"></div>
             </div>
             {this.modal()}
