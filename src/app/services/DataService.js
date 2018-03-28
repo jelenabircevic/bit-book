@@ -1,3 +1,4 @@
+
 import React from 'react';
 import axios from 'axios';
 import TextToPost from '../models/TextToPost'
@@ -87,6 +88,3 @@ class PostData {
 }
 
 export const postData = new PostData();
-
-
-

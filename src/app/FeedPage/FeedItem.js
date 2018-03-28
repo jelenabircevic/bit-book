@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { getData } from '../services/DataService'
 // import { Card, Icon, Image } from 'semantic-ui-react';
 // import SampleVideo_1280x720_1mb from '../../imports/video/SampleVideo_1280x720_1mb.mp4'
+
 
 
 class FeedItem extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        // this.state = { postList: [] }
     }
+
+    // componentDidMount() {
+
+    //     getData.fetchPosts().then((result) => {
+    //         console.log(result)
+    //         this.setState({ postList: result })
+
+    //     })
+    // }
+
+
+
     render() {
         return (
+
             // <div>
             //     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, rerum quod minima unde, quia nisi odio neque quos labore necessitatibus optio inventore dolorem mollitia quo veniam nostrum nemo, expedita dolorum!0</p>
             //     <p>Text post</p>
@@ -52,6 +67,7 @@ Ipsum ab repellendus cumque, dolorum temporibus est porro natus enim nihil elige
 
                 </div>
             </div>
+
         );
     }
 }
