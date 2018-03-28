@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { GetData } from '../services/DataService'
+import { getData } from '../services/DataService'
 import FeedVideo from './FeedVideo';
 import FeedText from './FeedText';
 import FeedImage from './FeedImage';
@@ -9,12 +9,15 @@ import FeedImage from './FeedImage';
 class FeedList extends Component {
     constructor(props) {
         super(props);
-        this.state = { postList: [] }
+        this.state = { 
+            postList : []
+         };
+
     }
 
     componentDidMount() {
 
-        GetData.fetchPosts().then((result) => {
+        getData.fetchPosts().then((result) => {
             console.log(result)
             this.setState({ postList: result })
 
