@@ -7,11 +7,17 @@ import FeedList from './FeedList';
 class FeedPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = {};
     }
     render() {
         return (
-            <FeedList/>
+
+            <div class="ui grid">
+                <div class="four wide column"></div>
+                <div class="eight wide column center aligned"><FeedList /></div>
+                <div class="four wide column"></div>
+            </div>
+
         );
     }
 }

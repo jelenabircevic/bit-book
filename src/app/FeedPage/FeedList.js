@@ -10,6 +10,7 @@ class FeedList extends Component {
     }
     render() {
         return (
+            
             <FeedItem/>
         );
     }
