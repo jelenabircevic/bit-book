@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import FeedItem from './FeedItem';
-import { GetData } from '../services/DataService'
+import { getData } from '../services/DataService'
 import FeedVideo from './FeedVideo';
+import _ from 'lodash'
 
 
 class FeedList extends Component {
@@ -14,21 +15,31 @@ class FeedList extends Component {
 
     }
 
+    renderFeed() {
+        getData.fetchPosts()
+            .then((result) => {
+                this.setState({ postList: result })
+            })
+    }
+
     componentDidMount() {
+        this.renderFeed()
+    }
 
-        GetData.fetchPosts().then((result) => {
-            console.log(result)
-            this.setState({ postList: result })
+    componentWillReceiveProps(nextProps) {
+        this.renderFeed()
+    }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.postList, nextState.postList)) {
+            return false;
+        }
 
-        })
-
-
+        return true;
     }
 
     render() {
         return (
-
             <div className="container">
                 <div className="row">
                     {/* {console.log(this.state.postList)} */}
@@ -57,9 +68,7 @@ class FeedList extends Component {
                             if (post.type == "text") {
 
                                 return <div class="ui card feed">
-                                    <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptas quidem laboriosam accusantium, magni magnam minima, veniam inventore sed obcaecati repellat sit modi alias excepturi fugiat impedit unde dolor dolorem!
-Ipsum ab repellendus cumque, dolorum temporibus est porro natus enim nihil eligendi ipsa officiis, in deserunt perspiciatis voluptates provident aliquam veritatis facilis neque quasi alias possimus, odit quia sit. Itaque.
-Repudiandae adipisci aperiam a cum minima dolor, enim recusandae saepe temporibus tempore! Ipsam facere, dignissimos, nisi magnam placeat estabo dignissimos! Ipsam consectetur perferendis possimus nostrum quidem, suscipit voluptate.</div>
+                                    <div class="description">{post.text}</div>
                                     <div class="extra content">
                                         <a className='float-left'><i aria-hidden="true" class="file alternate outline icon"></i>Text post</a>
                                         <a className='float-right'><i aria-hidden="true" class="comment icon"></i>15 comments</a>
@@ -69,7 +78,7 @@ Repudiandae adipisci aperiam a cum minima dolor, enim recusandae saepe temporibu
                             } else {
 
                                 return <div class="ui card feed">
-                                    <img src="https://semantic-ui.com/images/wireframe/image.png" class="ui image" />
+                                    <img src={post.imageUrl} class="ui image" />
                                     <div class="extra content">
                                         <a className='float-left'><i aria-hidden="true" class="image icon"></i>Image post</a>
                                         <a className='float-right'><i aria-hidden="true" class="comment icon"></i>15 comments</a>

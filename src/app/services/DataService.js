@@ -1,7 +1,6 @@
 
 import React from 'react';
 import axios from 'axios';
-import TextToPost from '../models/TextToPost'
 
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData{
@@ -51,7 +50,8 @@ class PostData {
                 text: data
             }
         });
-        return await getData.fetchPosts();
+        /* const update = await getData.fetchPosts();
+        console.log(update); */
         
     }
 

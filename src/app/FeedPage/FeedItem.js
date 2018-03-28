@@ -46,9 +46,7 @@ class FeedItem extends Component {
 
                     <div className="ui card feed">
 
-                        <div className="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptas quidem laboriosam accusantium, magni magnam minima, veniam inventore sed obcaecati repellat sit modi alias excepturi fugiat impedit unde dolor dolorem!
-Ipsum ab repellendus cumque, dolorum temporibus est porro natus enim nihil eligendi ipsa officiis, in deserunt perspiciatis voluptates provident aliquam veritatis facilis neque quasi alias possimus, odit quia sit. Itaque.
- Repudiandae adipisci aperiam a cum minima dolor, enim recusandae saepe temporibus tempore! Ipsam facere, dignissimos, nisi magnam placeat estabo dignissimos! Ipsam consectetur perferendis possimus nostrum quidem, suscipit voluptate.</div>
+                        <div className="description"></div>
 
                         <div className="extra content">
                             <a className='float-left'><i aria-hidden="true" className="file alternate outline icon"></i>Text post</a>
