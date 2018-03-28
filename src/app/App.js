@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 import FeedPage from './FeedPage/FeedPage';
-import Header from './partials/Header'
+import NavHeader from './partials/NavHeader'
+import Footer from './partials/Footer'
 
 class App extends Component {
   render() {
     return (
         <div>
-          <Header/>
+          <NavHeader/>
           <FeedPage/>
+          <Footer/>
         </div>
       
     );
