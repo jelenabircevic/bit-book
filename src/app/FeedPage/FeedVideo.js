@@ -6,31 +6,27 @@ import { GetData } from '../services/DataService'
 
 
 
-class FeedItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { postList: [] }
+const FeedVideo= (props) => {
+
+    let videoLink = props.post.videoUrl;
+    if (!videoLink.includes("embed")) {
+        videoLink = videoLink.replace("watch?v=", "/embed/");
     }
 
-    // componentDidMount() {
 
-    //     GetData.fetchPosts().then((result) => {
-    //         console.log(result)
-    //         this.setState({ postList: result })
+    return (
+        < div className="ui card feed" >
+            <iframe src={videoLink}>
+            </iframe>
+            <div className="extra content">
+                <a className='float-left'><i aria-hidden="true" class="video icon"></i>Video post</a>
+                <a className='float-right'><i aria-hidden="true" class="comment icon"></i>{props.post.commentsNum} comments</a>
+            </div>
+        </div>
+    )
 
-    //     })
-    // }
-
-
-
-    render() {
-        return (
-
-<div></div>
-
-           
-        );
-    }
 }
 
-export default FeedItem;
+
+export default FeedVideo;
+
