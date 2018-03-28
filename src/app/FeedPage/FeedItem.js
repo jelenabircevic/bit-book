@@ -16,37 +16,37 @@ class FeedItem extends Component {
             //     <p>Text post</p>
             //     <p>15 comments</p>
             // </div>
-            <div class="container">
-                <div class="row">
-                    <div class="ui card feed">
+            <div className="container">
+                <div className="row">
+                    {/* <div className="ui card feed">
                 
                         <iframe src="https://www.youtube.com/embed/m8e-FF8MsqU">
                        
                         </iframe>
-                        <div class="extra content">
-                            <a className='float-left'><i aria-hidden="true" class="video icon"></i>Video post</a>
-                            <a className='float-right'><i aria-hidden="true" class="comment icon"></i>15 comments</a>
+                        <div className="extra content">
+                            <a className='float-left'><i aria-hidden="true" className="video icon"></i>Video post</a>
+                            <a className='float-right'><i aria-hidden="true" className="comment icon"></i>15 comments</a>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div class="ui card feed">
+                    <div className="ui card feed">
 
-                        <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptas quidem laboriosam accusantium, magni magnam minima, veniam inventore sed obcaecati repellat sit modi alias excepturi fugiat impedit unde dolor dolorem!
+                        <div className="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptas quidem laboriosam accusantium, magni magnam minima, veniam inventore sed obcaecati repellat sit modi alias excepturi fugiat impedit unde dolor dolorem!
 Ipsum ab repellendus cumque, dolorum temporibus est porro natus enim nihil eligendi ipsa officiis, in deserunt perspiciatis voluptates provident aliquam veritatis facilis neque quasi alias possimus, odit quia sit. Itaque.
  Repudiandae adipisci aperiam a cum minima dolor, enim recusandae saepe temporibus tempore! Ipsam facere, dignissimos, nisi magnam placeat estabo dignissimos! Ipsam consectetur perferendis possimus nostrum quidem, suscipit voluptate.</div>
 
-                        <div class="extra content">
-                            <a className='float-left'><i aria-hidden="true" class="file alternate outline icon"></i>Text post</a>
-                            <a className='float-right'><i aria-hidden="true" class="comment icon"></i>15 comments</a>
+                        <div className="extra content">
+                            <a className='float-left'><i aria-hidden="true" className="file alternate outline icon"></i>Text post</a>
+                            <a className='float-right'><i aria-hidden="true" className="comment icon"></i>15 comments</a>
                         </div>
                     </div>
 
 
-                    <div class="ui card feed">
-                        <img src="https://semantic-ui.com/images/wireframe/image.png" class="ui image" />
-                        <div class="extra content">
-                            <a className='float-left'><i aria-hidden="true" class="image icon"></i>Image post</a>
-                            <a className='float-right'><i aria-hidden="true" class="comment icon"></i>15 comments</a>
+                    <div className="ui card feed">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png" className="ui image" />
+                        <div className="extra content">
+                            <a className='float-left'><i aria-hidden="true" className="image icon"></i>Image post</a>
+                            <a className='float-right'><i aria-hidden="true" className="comment icon"></i>15 comments</a>
                         </div>
                     </div>
 

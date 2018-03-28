@@ -6,7 +6,9 @@ import FeedItem from './FeedItem';
 class FeedList extends Component {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = { 
+            postList : []
+         };
     }
     render() {
         return (
