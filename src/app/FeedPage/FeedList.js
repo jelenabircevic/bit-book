@@ -8,7 +8,10 @@ import FeedVideo from './FeedVideo';
 class FeedList extends Component {
     constructor(props) {
         super(props);
-        this.state = { postList: [] }
+        this.state = { 
+            postList : []
+         };
+
     }
 
     componentDidMount() {
