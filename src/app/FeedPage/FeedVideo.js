@@ -9,7 +9,7 @@ import { GetData } from '../services/DataService'
 class FeedItem extends Component {
     constructor(props) {
         super(props);
-        // this.state = { postList: [] }
+        this.state = { postList: [] }
     }
 
     // componentDidMount() {
@@ -34,4 +34,3 @@ class FeedItem extends Component {
 }
 
 export default FeedItem;
-
