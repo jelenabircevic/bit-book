@@ -44,3 +44,9 @@
 iframe {
   height: 281px;
 }
+
+.ui.comments {
+  margin: auto;
+  text-align: left;
+  max-width: 500px;
+}
