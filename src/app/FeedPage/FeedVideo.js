@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { GetData } from '../services/DataService'
-// import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 // import SampleVideo_1280x720_1mb from '../../imports/video/SampleVideo_1280x720_1mb.mp4'
 
 
@@ -15,14 +15,14 @@ const FeedVideo= (props) => {
 
 
     return (
-        < div className="ui card feed" >
-            <iframe src={videoLink}>
+        <Card fluid>
+            <iframe title={videoLink} src={videoLink}>
             </iframe>
-            <div className="extra content">
-                <a className='float-left'><i aria-hidden="true" class="video icon"></i>Video post</a>
-                <a className='float-right'><i aria-hidden="true" class="comment icon"></i>{props.post.commentsNum} comments</a>
-            </div>
-        </div>
+            <Card.Content extra>
+                <a className='float-left'><i aria-hidden="true" className="video icon"></i>Video post</a>
+                <a className='float-right'><i aria-hidden="true" className="comment icon"></i>{props.post.commentsNum} comments</a>
+            </Card.Content>
+        </Card>
     )
 
 }

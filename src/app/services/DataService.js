@@ -2,9 +2,24 @@
 import React from 'react';
 import axios from 'axios';
 import {PostVideo, PostText, PostImage} from '../models/TextPost'
+import User from '../models/User'
 
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData {
+    
+    async getUser(id) {
+        const user = await axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': 'bitbook',
+                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+            },
+            url: `${requestUrl}/users/${id}`,
+            method: 'get',
+        })
+        console.log('user iz servisa', user.data);
+        return new User(user.data)
+    }
 
     createRequest(url, method) {
         let request = new Request(requestUrl + url, {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import FeedList from './FeedList';
 import Loader from '../partials/Loader'
-import { Button, Label } from 'semantic-ui-react'
+import { Button, Label, Grid } from 'semantic-ui-react'
 import _ from 'lodash'
 import { postData, getData } from '../services/DataService'
 import ModalText from './ModalText'
@@ -92,7 +92,7 @@ class FeedPage extends Component {
     }
 
     isValidImage(input) {
-        return ((input.match(/\.(jpeg|jpg|gif|png)$/) != null)&&(input.match(/^(http|https):\/\//) != null));
+        return ((input.match(/\.(jpeg|jpg|gif|png)$/) != null) && (input.match(/^(http|https):\/\//) != null));
     }
 
     isValidVideo(input) {
@@ -174,11 +174,17 @@ class FeedPage extends Component {
         return (
             <React.Fragment>
                 {this.addButton()}
-                <div className="ui grid">
-                    <div className="four wide column"></div>
-                    <div className="eight wide column center aligned"><FeedList reRender={this.state.reRender} /></div>
-                    <div className="four wide column"></div>
-                </div>
+                <Grid>
+                    <Grid.Row>
+                        <Grid.Column width="four">
+                        </Grid.Column>
+                        <Grid.Column width="eight">
+                            <FeedList reRender={this.state.reRender} />
+                        </Grid.Column>
+                        <Grid.Column width="four">
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
                 <ModalText open={this.state.modal.open.text} onClose={this.close} handleInput={this.handleInput} sendPost={this.sendTextPost} error={this.state.errorMessage} />
                 <ModalImage open={this.state.modal.open.image} onClose={this.close} handleInput={this.handleInput} sendPost={this.sendImagePost} error={this.state.errorMessage} />
                 <ModalVideo open={this.state.modal.open.video} onClose={this.close} handleInput={this.handleInput} sendPost={this.sendVideoPost} error={this.state.errorMessage} />

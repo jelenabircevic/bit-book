@@ -41,23 +41,23 @@ class FeedList extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container fluid">
                 <div className="row">
                     {/* {console.log(this.state.postList)} */}
-                    {this.state.postList.map((post) => {
+                    {this.state.postList.map((post, i) => {
                         // console.log(post.type)
                         if (post.type == "video") {
 
-                            return <FeedVideo post={post} />
+                            return <FeedVideo key={i} post={post} />
 
                         } else
                             if (post.type == "text") {
 
-                                return <FeedText post={post} />
+                                return <FeedText key={i} post={post} />
 
                             } else {
 
-                                return <FeedImage post={post} />
+                                return <FeedImage key={i} post={post} />
 
                             }
                     }
