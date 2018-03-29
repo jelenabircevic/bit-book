@@ -7,7 +7,7 @@ const NavHeader = (props) => {
     return (
         <Menu borderless>
             <Menu.Menu position='left'>
-                <Menu.Item header position="left">Bitbook</Menu.Item>
+                <Menu.Item as={Header} position="left">Bitbook</Menu.Item>
             </Menu.Menu>
             <Menu.Menu position='right'>
                 <Menu.Item as={Link} to="/" active={window.location.pathname === '/'}> Feed</Menu.Item>
