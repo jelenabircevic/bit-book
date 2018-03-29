@@ -29,6 +29,7 @@ class FetchData {
             })
             .then(function (result) {
 
+                result.splice(20);
                 return result.map(post => {
 
                     if (post.type === 'video') {
@@ -74,7 +75,7 @@ class PostData {
                 'Key': 'bitbook',
                 'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
             },
-            url: `${requestUrl}/TextPosts`,
+            url: `${requestUrl}/ImagePosts`,
             method: 'post',
             data: {
                 imageUrl: data
@@ -89,7 +90,7 @@ class PostData {
                     'Key': 'bitbook',
                     'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
                 },
-                url: `${requestUrl}/TextPosts`,
+                url: `${requestUrl}/VideoPosts`,
                 method: 'post',
                 data: {
                     videoUrl: data
