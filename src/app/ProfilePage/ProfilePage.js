@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Grid } from 'semantic-ui-react'
+import { Card, Icon, Grid, Button, Image } from 'semantic-ui-react'
 import { getData } from '../services/DataService'
 
 class ProfilePage extends Component {
@@ -23,12 +23,13 @@ class ProfilePage extends Component {
         const extra = (
             <div>
                 <a className="float-left">
-                    <Icon name='file text' />
-                    {`${this.state.user.postsCount} post(s)`}
+                    <Button circular content={this.state.user.postsCount} color="teal" id="addButton" label="post(s)" />
+
+
                 </a>
                 <a className="float-right">
-                    <Icon name='comment' />
-                    {`${this.state.user.commentsCount} comment(s)`}
+                    <Button circular content={this.state.user.commentsCount} color="violet" id="addButton" label="comment(s)" />
+
                 </a>
             </div>
         )
@@ -44,13 +45,16 @@ class ProfilePage extends Component {
                     <Grid.Column width="4">
                     </Grid.Column>
                     <Grid.Column width="8">
-                        <Card centered fluid
-                            image={this.state.user.avatarUrl}
-                            header={this.state.user.name}
-                            // meta='Friend'
-                            description={this.state.user.about}
-                            extra={extra}
-                        />
+                        <Card centered fluid >
+                            <Image style={{width: 'inherit'}} src={this.state.user.avatarUrl} />
+                            <Card.Content>
+                                <Card.Header>{this.state.user.name}</Card.Header>
+                                <Card.Description>{this.state.user.about}</Card.Description>
+                            </Card.Content>
+                            <Card.Content extra>
+                                {extra}
+                            </Card.Content>
+                        </Card>
                     </Grid.Column>
                     <Grid.Column width="4">
                     </Grid.Column>

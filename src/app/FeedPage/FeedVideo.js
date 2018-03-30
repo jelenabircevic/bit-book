@@ -15,7 +15,7 @@ const FeedVideo= (props) => {
 
 
     return (
-        <Card fluid>
+        <Card>
             <iframe title={videoLink} src={videoLink}>
             </iframe>
             <Card.Content extra>

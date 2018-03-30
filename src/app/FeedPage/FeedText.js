@@ -6,7 +6,7 @@ import { Card } from 'semantic-ui-react'
 const FeedText = (props) => {
 
     return (
-        <Card fluid>
+        <Card>
             <Card.Description><p>{props.post.text}</p></Card.Description>
             <Card.Content extra>
                 <a className='float-left'><i aria-hidden="true" className="file alternate outline icon"></i>Text post</a>

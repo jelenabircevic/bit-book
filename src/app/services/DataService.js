@@ -6,6 +6,19 @@ import User from '../models/User'
 
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData {
+    async getUsers() {
+        const users = await axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': 'bitbook',
+                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+            },
+            url: `${requestUrl}/users`,
+            method: 'get',
+        })
+        console.log(users.data);
+        return users.data.map(e => new User(e))
+    }
     
     async getUser(id) {
         const user = await axios({

@@ -6,7 +6,7 @@ import { Card, Image } from 'semantic-ui-react'
 const FeedImage = (props) => {
 
     return (
-        <Card fluid>
+        <Card>
                 <Image style={{width:"inherit"}} src={props.post.imageUrl} />
             <Card.Content extra>
                 <a className='float-left'><i aria-hidden="true" className="image icon"></i>Image post</a>
