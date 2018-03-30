@@ -51,7 +51,7 @@ class FeedList extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container fluid">
                 <div className="row">
                     {/* {console.log(this.state.postList)} */}
                     {this.state.postList.map(this.map)}
