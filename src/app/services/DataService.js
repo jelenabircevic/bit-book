@@ -181,3 +181,34 @@ class PostData {
 }
 
 export const postData = new PostData();
+
+class DeleteData {
+
+    deletePost(id) {
+        return axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': 'bitbook',
+                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+            },
+            url: `${requestUrl}/Posts/${id}`,
+            method: 'delete',
+           
+        });
+    }
+    // deleteComments(id) {
+    //     return axios({
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Key': 'bitbook',
+    //             'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+    //         },
+    //         url: `${requestUrl}/Comments/${id}`,
+    //         method: 'delete',
+           
+    //     });
+    // }
+ 
+ }
+ 
+ export const deleteData = new DeleteData();
