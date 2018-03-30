@@ -35,25 +35,17 @@ class FeedList extends Component {
         if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.postList, nextState.postList)) {
             return false;
         }
-
         return true;
     }
 
     map = (post) => {
-        // console.log(post.type)
         if (post.type == "video") {
-
             return <FeedVideo post={post} />
-
         } else
             if (post.type == "text") {
-
                 return <Link to={`/${post.type}/${post.id}`}><FeedText post={post} /></Link>
-
             } else {
-
                 return <Link to={`/${post.type}/${post.id}`}><FeedImage post={post} /></Link>
-
             }
     }
 
@@ -63,7 +55,6 @@ class FeedList extends Component {
                 <div className="row">
                     {/* {console.log(this.state.postList)} */}
                     {this.state.postList.map(this.map)}
-
                 </div>
             </div>
         );
