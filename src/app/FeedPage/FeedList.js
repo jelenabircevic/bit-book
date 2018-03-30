@@ -11,8 +11,10 @@ class FeedList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            postList: []
+            postList: [],
+            filteredList: []
         };
+
 
     }
 
@@ -20,7 +22,47 @@ class FeedList extends Component {
         getData.fetchPosts()
             .then((result) => {
                 this.setState({ postList: result })
+                this.setState({ filteredList: result })
+
             })
+    }
+
+    showVideos=() => {
+
+        let newPostList = [];
+        this.state.postList.forEach(element => {
+            
+            if (element.type === 'video') {
+                newPostList.push(element)
+            }
+        });
+        this.setState({ filteredList : newPostList });
+    }
+
+    showImages=() => {
+        let newPostList = [];
+        this.state.postList.forEach(element => {
+            
+            if (element.type === 'image') {
+                newPostList.push(element)
+            }
+        });
+        this.setState({ filteredList : newPostList });
+    }
+    showAll=() => {
+       
+        this.setState({ filteredList: this.state.postList});
+    }
+
+    showTexts=() => {
+        let newPostList = [];
+        this.state.postList.forEach(element => {
+            
+            if (element.type === 'text') {
+                newPostList.push(element)
+            }
+        });
+        this.setState({ filteredList : newPostList });
     }
 
     componentDidMount() {
@@ -32,7 +74,7 @@ class FeedList extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.postList, nextState.postList)) {
+        if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.filteredList, nextState.filteredList)) {
             return false;
         }
         return true;
@@ -40,7 +82,7 @@ class FeedList extends Component {
 
     map = (post) => {
         if (post.type == "video") {
-            return <FeedVideo post={post} />
+            return <Link to={`/${post.type}/${post.id}`}><FeedVideo post={post} /></Link>
         } else
             if (post.type == "text") {
                 return <FeedText post={post} />
@@ -49,12 +91,26 @@ class FeedList extends Component {
             }
     }
 
+
+
     render() {
         return (
             <div className="container fluid">
                 <div className="row">
                     {/* {console.log(this.state.postList)} */}
-                    {this.state.postList.map(this.map)}
+
+                    <div>
+
+                        <button class="ui red basic button" role="button" onClick={this.showVideos}>Show Videos</button>
+                        <button class="ui orange basic button" role="button" onClick={this.showImages}>Show Images</button>
+                        <button class="ui yellow basic button" role="button" onClick={this.showTexts}>Show Texts</button>
+                        <button class="ui blue basic button" role="button" onClick={this.showAll}>Show All</button>
+                        
+
+                    </div>
+
+                    {this.state.filteredList.map(this.map)}
+
                 </div>
             </div>
         );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getData, postData } from '../services/DataService'
+import { getData,deleteData, postData } from '../services/DataService'
+
 // import _ from 'lodash';
 
 
@@ -26,6 +27,15 @@ class PostDetails extends Component {
         postData.postComment(this.state.commentValue, this.state.postID)
             .then(response => {
                 this.fetchComments();
+            })
+    }
+
+    deletePost = (e) => {
+        e.preventDefault();
+
+        deleteData.deletePost(this.state.postID)
+            .then(response => {
+                this.props.history.push('/')
             })
     }
 
@@ -63,7 +73,11 @@ class PostDetails extends Component {
             return <img src={this.state.post.imageUrl} className="ui image" alt="post-pic" />
         } else
             if (this.props.match.params.type === "video") {
+<<<<<<< HEAD
                 return <iframe src={this.state.post.videoUrl} className="ui image" title="post-title" />
+=======
+                return <iframe src={this.state.post.videoUrl} class="ui image" title="post-title"></iframe>
+>>>>>>> cf1a25cf4d3af8807aa3ec820a5092127170dfb8
 
             } else {
                 return <p className="text-align-center">{this.state.post.text}</p>
@@ -84,7 +98,22 @@ class PostDetails extends Component {
                         <div className="extra content">
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div className="ui comments">
+=======
+                    <div class="ui comments">
+
+
+                    <form class="ui reply form">
+                            <div class="field">
+                                <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
+                            </div>
+                            <button class="ui icon primary left labeled button" onClick={this.sendComment}>
+                                <i aria-hidden="true" class="edit icon"></i>Add Comment</button>
+                        </form>
+
+
+>>>>>>> cf1a25cf4d3af8807aa3ec820a5092127170dfb8
                         {this.state.commentList.map((comment) => {
 
                             return <div className="comment">
@@ -99,10 +128,13 @@ class PostDetails extends Component {
                                     <div className="text">
                                         <p>{comment.body}</p>
                                     </div>
+                                    
                                 </div>
+                                
                             </div>
                         })}
 
+<<<<<<< HEAD
                         <form className="ui reply form">
                             <div className="field">
                                 <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
@@ -110,6 +142,10 @@ class PostDetails extends Component {
                             <button className="ui icon primary left labeled button" onClick={this.sendComment}>
                                 <i aria-hidden="true" className="edit icon"></i>Add Comment</button>
                         </form>
+=======
+<button class="ui icon primary left labeled button" onClick={this.deletePost}>
+                                <i aria-hidden="true" class="edit icon"></i>Delete Post</button>
+>>>>>>> cf1a25cf4d3af8807aa3ec820a5092127170dfb8
 
                     </div>
                 </div>
@@ -119,3 +155,4 @@ class PostDetails extends Component {
 }
 
 export default PostDetails;
+ 
