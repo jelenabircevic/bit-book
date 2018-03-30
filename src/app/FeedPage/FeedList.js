@@ -43,9 +43,9 @@ class FeedList extends Component {
             return <FeedVideo post={post} />
         } else
             if (post.type == "text") {
-                return <Link to={`/${post.type}/${post.id}`}><FeedText post={post} /></Link>
+                return <FeedText post={post} />
             } else {
-                return <Link to={`/${post.type}/${post.id}`}><FeedImage post={post} /></Link>
+                return <FeedImage post={post} />
             }
     }
 

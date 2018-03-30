@@ -9,6 +9,7 @@ import Comment from '../models/Comment';
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData {
     async getUsers() {
+        try {
         const users = await axios({
             headers: {
                 'Content-Type': 'application/json',
@@ -17,12 +18,19 @@ class FetchData {
             },
             url: `${requestUrl}/users`,
             method: 'get',
-        })
+        }) 
         console.log(users.data);
         return users.data.map(e => new User(e))
-    }
+        }
+        catch(error){
+            console.log(error);
+            return error;
+        }
+    } 
+    
     
     async getUser(id) {
+        try {
         const user = await axios({
             headers: {
                 'Content-Type': 'application/json',
@@ -34,6 +42,11 @@ class FetchData {
         })
         console.log('user iz servisa', user.data);
         return new User(user.data)
+        }
+        catch(error){
+            console.log(error);
+            return error;
+        }
     }
 
     createRequest(url, method) {
@@ -74,6 +87,10 @@ class FetchData {
                 })
 
             })
+            .catch(error => {
+                console.log(error);
+                return error;
+            })
 
     }
 
@@ -92,6 +109,10 @@ class FetchData {
                 })
 
             })
+            .catch(error => {
+                console.log(error);
+                return error;
+            })
 
     }
 
@@ -104,6 +125,10 @@ class FetchData {
             .then(function (post) {
 
                 return new PostVideo(post);
+            })
+            .catch(error => {
+                console.log(error);
+                return error;
             })
 
     }
@@ -118,6 +143,10 @@ class FetchData {
 
                 return new PostText(post);
             })
+            .catch(error => {
+                console.log(error);
+                return error;
+            })
 
     }
 
@@ -131,6 +160,10 @@ class FetchData {
 
                 return new PostImage(post);
             })
+            .catch(error => {
+                console.log(error);
+                return error;
+            })
 
     }
 
@@ -141,6 +174,7 @@ export const getData = new FetchData();
 
 class PostData {
     async postText(data) {
+        try {
         const post = await axios({
             headers: {
                 'Content-Type': 'application/json',
@@ -154,10 +188,15 @@ class PostData {
             }
         });
         return await getData.fetchPosts();
-
+    }
+    catch(error){
+        console.log(error);
+        return error;
+    }
     }
 
     async postImage(data) {
+        try {
         return await axios({
             headers: {
                 'Content-Type': 'application/json',
@@ -171,9 +210,15 @@ class PostData {
             }
         })
     }
+    catch(error){
+        console.log(error);
+        return error;
+    }
+    }
 
 
     async postVideo(data) {
+        try{
         return await axios({
             headers: {
                 'Content-Type': 'application/json',
@@ -187,8 +232,14 @@ class PostData {
             }
         });
     }
+    catch(error){
+        console.log(error);
+        return error;
+    }
+    }
 
     async postComment(data, id) {
+        try {
         return await axios({
             headers: {
                 'Content-Type': 'application/json',
@@ -204,8 +255,11 @@ class PostData {
             }
         });
     }
-
-
+    catch(error){
+        console.log(error);
+        return error;
+    }
+    }
 }
 
 export const postData = new PostData();

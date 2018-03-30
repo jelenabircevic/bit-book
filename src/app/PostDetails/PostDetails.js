@@ -60,10 +60,10 @@ class PostDetails extends Component {
     printPost() {
 
         if (this.props.match.params.type === "image") {
-            return <img src={this.state.post.imageUrl} class="ui image" alt="post-pic" />
+            return <img src={this.state.post.imageUrl} className="ui image" alt="post-pic" />
         } else
             if (this.props.match.params.type === "video") {
-                return <iframe src={this.state.post.videoUrl} class="ui image" title="post-title" />
+                return <iframe src={this.state.post.videoUrl} className="ui image" title="post-title" />
 
             } else {
                 return <p className="text-align-center">{this.state.post.text}</p>
@@ -77,38 +77,38 @@ class PostDetails extends Component {
             <div className="container">
                 <div className="row">
 
-                    <div class="ui card feed">
+                    <div className="ui card feed">
 
                         {this.printPost()}
 
-                        <div class="extra content">
+                        <div className="extra content">
                         </div>
                     </div>
-                    <div class="ui comments">
+                    <div className="ui comments">
                         {this.state.commentList.map((comment) => {
 
-                            return <div class="comment">
-                                <a class="avatar">
+                            return <div className="comment">
+                                <a className="avatar">
                                     <img src="https://semantic-ui.com/images/avatar/large/elliot.jpg" alt="user-img" />
                                 </a>
-                                <div class="content">
-                                    <div class="author">Joe Henderson</div>
-                                    <div class="metadata">
+                                <div className="content">
+                                    <div className="author">Joe Henderson</div>
+                                    <div className="metadata">
                                         <div>1 day ago</div>
                                     </div>
-                                    <div class="text">
+                                    <div className="text">
                                         <p>{comment.body}</p>
                                     </div>
                                 </div>
                             </div>
                         })}
 
-                        <form class="ui reply form">
-                            <div class="field">
+                        <form className="ui reply form">
+                            <div className="field">
                                 <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
                             </div>
-                            <button class="ui icon primary left labeled button" onClick={this.sendComment}>
-                                <i aria-hidden="true" class="edit icon"></i>Add Comment</button>
+                            <button className="ui icon primary left labeled button" onClick={this.sendComment}>
+                                <i aria-hidden="true" className="edit icon"></i>Add Comment</button>
                         </form>
 
                     </div>

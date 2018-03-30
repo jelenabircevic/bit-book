@@ -16,9 +16,9 @@ class App extends Component {
         <NavHeader />
         <Switch>
           <Route path='/feed' component={FeedPage} />
-          <Route  path='/:type/:id' component={PostDetails} />
           <Route exact path='/people' component={PeoplePage} />
           <Route path='/people/:id' component={ProfilePage} />
+          <Route path='/:type/:id' component={PostDetails} /> 
           <Redirect from='/profile' to='/people/391' />
           <Redirect from='/' to='/feed' />
         </Switch>

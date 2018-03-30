@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { GetData } from '../services/DataService'
 import { Card, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const FeedImage = (props) => {
 
     return (
-        <Card>
+        <Card as={Link} to={`/image/${props.post.id}`}>
                 <Image style={{width:"inherit"}} src={props.post.imageUrl} />
             <Card.Content extra>
                 <a className='float-left'><i aria-hidden="true" className="image icon"></i>Image post</a>
