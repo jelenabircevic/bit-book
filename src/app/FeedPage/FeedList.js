@@ -5,14 +5,14 @@ import _ from 'lodash'
 import FeedVideo from './FeedVideo';
 import FeedText from './FeedText';
 import FeedImage from './FeedImage';
-
+import { Link } from 'react-router-dom';
 
 class FeedList extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            postList : []
-         };
+        this.state = {
+            postList: []
+        };
 
     }
 
@@ -35,8 +35,18 @@ class FeedList extends Component {
         if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.postList, nextState.postList)) {
             return false;
         }
-
         return true;
+    }
+
+    map = (post) => {
+        if (post.type == "video") {
+            return <FeedVideo post={post} />
+        } else
+            if (post.type == "text") {
+                return <Link to={`/${post.type}/${post.id}`}><FeedText post={post} /></Link>
+            } else {
+                return <Link to={`/${post.type}/${post.id}`}><FeedImage post={post} /></Link>
+            }
     }
 
     render() {
@@ -44,26 +54,7 @@ class FeedList extends Component {
             <div className="container fluid">
                 <div className="row">
                     {/* {console.log(this.state.postList)} */}
-                    {this.state.postList.map((post, i) => {
-                        // console.log(post.type)
-                        if (post.type == "video") {
-
-                            return <FeedVideo key={i} post={post} />
-
-                        } else
-                            if (post.type == "text") {
-
-                                return <FeedText key={i} post={post} />
-
-                            } else {
-
-                                return <FeedImage key={i} post={post} />
-
-                            }
-                    }
-
-                    )}
-
+                    {this.state.postList.map(this.map)}
                 </div>
             </div>
         );

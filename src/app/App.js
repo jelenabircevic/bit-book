@@ -5,7 +5,9 @@ import NavHeader from './partials/NavHeader'
 import ProfilePage from './ProfilePage/ProfilePage'
 import PeoplePage from './PeoplePage/PeoplePage'
 import Footer from './partials/Footer'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom';
+import PostDetails from './PostDetails/PostDetails';
+
 
 class App extends Component {
   render() {
@@ -14,6 +16,7 @@ class App extends Component {
         <NavHeader />
         <Switch>
           <Route path='/feed' component={FeedPage} />
+          <Route  path='/:type/:id' component={PostDetails} />
           <Route exact path='/people' component={PeoplePage} />
           <Route path='/people/:id' component={ProfilePage} />
           <Redirect from='/profile' to='/people/391' />
@@ -27,3 +30,4 @@ class App extends Component {
 }
 
 export default App;
+
