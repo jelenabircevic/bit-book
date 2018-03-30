@@ -1,7 +1,9 @@
 
 import React from 'react';
 import axios from 'axios';
-import {PostVideo, PostText, PostImage} from '../models/TextPost'
+import { PostVideo, PostText, PostImage } from '../models/TextPost';
+import Comment from '../models/Comment';
+
 
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData {
@@ -46,6 +48,65 @@ class FetchData {
             })
 
     }
+
+
+    fetchComments(id) {
+
+        return fetch(this.createRequest("/Comments/?postId=" + id, "GET"))
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+
+                return result.map(comment => {
+                    return new Comment(comment);
+
+                })
+
+            })
+
+    }
+
+    fetchVideoPost(id) {
+
+        return fetch(this.createRequest(`/VideoPosts/${id}`, "GET"))
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (post) {
+
+                return new PostVideo(post);
+            })
+
+    }
+
+    fetchTextPost(id) {
+
+        return fetch(this.createRequest(`/TextPosts/${id}`, "GET"))
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (post) {
+
+                return new PostText(post);
+            })
+
+    }
+
+    fetchImagePost(id) {
+
+        return fetch(this.createRequest('/ImagePosts/'+id, "GET"))
+            .then((response) =>{
+                return response.json();
+            })
+            .then((post)=> {
+
+                return new PostImage(post);
+            })
+
+    }
+
+    
 }
 
 export const getData = new FetchData();
@@ -83,21 +144,40 @@ class PostData {
         })
     }
 
-        async postVideo(data) {
-            return await axios({
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
-                },
-                url: `${requestUrl}/VideoPosts`,
-                method: 'post',
-                data: {
-                    videoUrl: data
-                }
-            });
-        }
 
+    async postVideo(data) {
+        return await axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': 'bitbook',
+                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+            },
+            url: `${requestUrl}/VideoPosts`,
+            method: 'post',
+            data: {
+                videoUrl: data
+            }
+        });
     }
 
-    export const postData = new PostData();
+    async postComment(data, id) {
+        return await axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': 'bitbook',
+                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+            },
+            url: `${requestUrl + '/Comments'}/TextPosts`,
+            method: 'post',
+            data: {
+                body: data,
+                postId: id,
+                // 664
+            }
+        });
+    }
+
+
+}
+
+export const postData = new PostData();
