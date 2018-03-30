@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getData, postData } from '../services/DataService'
+import { getData,deleteData, postData } from '../services/DataService'
+
 // import _ from 'lodash';
 
 
@@ -26,6 +27,15 @@ class PostDetails extends Component {
         postData.postComment(this.state.commentValue, this.state.postID)
             .then(response => {
                 this.fetchComments();
+            })
+    }
+
+    deletePost = (e) => {
+        e.preventDefault();
+
+        deleteData.deletePost(this.state.postID)
+            .then(response => {
+                this.props.history.push('/')
             })
     }
 
@@ -63,7 +73,7 @@ class PostDetails extends Component {
             return <img src={this.state.post.imageUrl} class="ui image" alt="post-pic" />
         } else
             if (this.props.match.params.type === "video") {
-                return <iframe src={this.state.post.videoUrl} class="ui image" title="post-title" />
+                return <iframe src={this.state.post.videoUrl} class="ui image" title="post-title"></iframe>
 
             } else {
                 return <p className="text-align-center">{this.state.post.text}</p>
@@ -85,6 +95,17 @@ class PostDetails extends Component {
                         </div>
                     </div>
                     <div class="ui comments">
+
+
+                    <form class="ui reply form">
+                            <div class="field">
+                                <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
+                            </div>
+                            <button class="ui icon primary left labeled button" onClick={this.sendComment}>
+                                <i aria-hidden="true" class="edit icon"></i>Add Comment</button>
+                        </form>
+
+
                         {this.state.commentList.map((comment) => {
 
                             return <div class="comment">
@@ -99,17 +120,14 @@ class PostDetails extends Component {
                                     <div class="text">
                                         <p>{comment.body}</p>
                                     </div>
+                                    
                                 </div>
+                                
                             </div>
                         })}
 
-                        <form class="ui reply form">
-                            <div class="field">
-                                <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
-                            </div>
-                            <button class="ui icon primary left labeled button" onClick={this.sendComment}>
-                                <i aria-hidden="true" class="edit icon"></i>Add Comment</button>
-                        </form>
+<button class="ui icon primary left labeled button" onClick={this.deletePost}>
+                                <i aria-hidden="true" class="edit icon"></i>Delete Post</button>
 
                     </div>
                 </div>
@@ -119,3 +137,4 @@ class PostDetails extends Component {
 }
 
 export default PostDetails;
+ 
