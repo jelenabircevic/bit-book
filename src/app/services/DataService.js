@@ -261,7 +261,6 @@ class PostData {
         }
     }
     async editUser(data) {
-        console.log(data);
         try {
             return await axios({
                 headers: {
@@ -279,6 +278,21 @@ class PostData {
             return error;
         }
     }
+
+    imageUpload(file) {
+        const url = `${requestUrl}/upload`;
+        const formData = new FormData();
+        formData.append('file', file)
+        const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Key': 'bitbook',
+                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+            }
+        }
+        return axios.post(url, formData, config)
+    }
+
 }
 
 export const postData = new PostData();

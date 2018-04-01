@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Label, Image, Modal, Form } from 'semantic-ui-react'
+import { Button, Label, Image, Modal, Form, Input } from 'semantic-ui-react'
 
 const ModalEdit = (props) => {
     const { open, size } = props.modal
@@ -7,14 +7,14 @@ const ModalEdit = (props) => {
         <Modal style={{ marginTop: 100, marginRight: "auto", marginBottom: "auto", marginLeft: "auto" }} size={size} open={open} onClose={props.close}>
             <Modal.Header>
                 <p>Edit profile</p>
-                <small>Form-fields left empty will not be edited.</small>
+                <small>Form-fields left empty will not be edited</small>
             </Modal.Header>
             <Modal.Content>
                 <Form>
                     <Form.Field>
                         <label>Edit name:</label>
-                        <input id='textInput' type='text' onChange={props.handleNameInput} placeholder='Your name...' maxLength="31"/>
-                        {(props.nameLength==31)? <small style={{color: 'red'}} >{`31/30    ${props.errorLength}`}</small> : <small>{`${props.nameLength}/30`}</small>}
+                        <input id='textInput' type='text' onChange={props.handleNameInput} placeholder='Your name...' maxLength="31" />
+                        {(props.nameLength == 31) ? <small style={{ color: 'red' }} >{`31/30    ${props.errorLength}`}</small> : <small>{`${props.nameLength}/30`}</small>}
                     </Form.Field>
                     <Form.Field>
                         <label>Edit your info:</label>
@@ -23,7 +23,11 @@ const ModalEdit = (props) => {
                     <Form.Field>
                         <label>Enter image:</label>
                         <input id='textInput' type='text' onChange={props.handleImageInput} onBlur={props.setErrorUrl} placeholder='Image URL...' />
-                        <small style={{color: 'red'}}>{props.errorUrl}</small>
+                        <small style={{ color: 'red' }}>{props.errorUrl}</small>
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Upload image:</label>
+                        <input type="file" onChange={props.imageUpload} />
                     </Form.Field>
                 </Form>
             </Modal.Content>

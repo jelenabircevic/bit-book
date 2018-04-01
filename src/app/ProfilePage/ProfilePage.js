@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Card, Icon, Grid, Button, Image, Modal } from 'semantic-ui-react'
+import { Card, Icon, Grid, Button, Image, Modal, Form } from 'semantic-ui-react'
 import { getData, postData } from '../services/DataService'
 import ModalEdit from './ModalEdit'
 
 class ProfilePage extends Component {
     constructor(props) {
         super(props);
-        this.userEdit = {}
+        this.userEdit = {}  // using state as less as possible
         this.state = {
+            file: null,
             nameLength: 0,
             modal: {
                 open: false,
@@ -23,7 +24,10 @@ class ProfilePage extends Component {
         this.handleInfoInput = this.handleInfoInput.bind(this);
         this.sendEdit = this.sendEdit.bind(this);
         this.validateUrl = this.validateUrl.bind(this);
+        this.handleImageUpload = this.handleImageUpload.bind(this);
+
     }
+
     show = size => () => this.setState({
         modal: { size, open: true }
     })
@@ -37,7 +41,7 @@ class ProfilePage extends Component {
         this.userEdit = {}
     }
 
-    
+
     handleNameInput(e) {
         this.userEdit.name = e.target.value
         this.setState({
@@ -45,18 +49,26 @@ class ProfilePage extends Component {
             errorLength: '',
         })
     }
+
     handleImageInput(e) {
         this.userEdit.avatarUrl = e.target.value
         this.setState({ errorUrl: '' })
     }
+
     handleInfoInput(e) {
         this.userEdit.about = e.target.value
     }
-    
+
+    handleImageUpload(e) {
+        this.setState({ file: e.target.files[0] })
+
+    }
+
     isValidImage(input) {
         return ((input.match(/\.(jpeg|jpg|gif|png)$/) != null) && (input.match(/^(http|https):\/\//) != null));
     }
-    validateUrl () {
+
+    validateUrl() {
         if (this.userEdit.avatarUrl) {
             if (!this.isValidImage(this.userEdit.avatarUrl)) {
                 this.setState({ errorUrl: 'Not valid image URL' })
@@ -66,13 +78,18 @@ class ProfilePage extends Component {
         return false;
     }
 
-    sendEdit() {
+    async sendEdit() {
         if (this.validateUrl()) {
             return
         }
         if (this.state.nameLength > 30) {
             this.setState({ errorLength: 'Name must be shorter than 30 letters!' })
             return
+        }
+        if (this.state.file) {
+            await postData.imageUpload(this.state.file).then((response) => {
+                this.userEdit.avatarUrl = response.data;
+            })
         }
         const data = this.state.user
         data.email = 'user@unFriendly'
@@ -112,11 +129,6 @@ class ProfilePage extends Component {
             </div>
         )
 
-        /* if (_.isEmpty(this.state.user)) {
-               return 
-               <Loader />
-           )
-       } */
         return (
             <React.Fragment>
                 <Grid>
@@ -140,7 +152,7 @@ class ProfilePage extends Component {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-                <ModalEdit modal={this.state.modal} nameLength={this.state.nameLength} close={this.close} handleInfoInput={this.handleInfoInput} handleImageInput={this.handleImageInput} handleNameInput={this.handleNameInput} sendEdit={this.sendEdit} errorUrl={this.state.errorUrl} errorLength={this.state.errorLength} validateUrl={this.validateUrl} />
+                <ModalEdit modal={this.state.modal} nameLength={this.state.nameLength} close={this.close} handleInfoInput={this.handleInfoInput} handleImageInput={this.handleImageInput} handleNameInput={this.handleNameInput} sendEdit={this.sendEdit} errorUrl={this.state.errorUrl} errorLength={this.state.errorLength} validateUrl={this.validateUrl} imageUpload={this.handleImageUpload} onFormSubmit={this.onFormSubmit} />
             </React.Fragment>
         );
     }
