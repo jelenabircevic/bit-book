@@ -73,11 +73,7 @@ class PostDetails extends Component {
             return <img src={this.state.post.imageUrl} className="ui image" alt="post-pic" />
         } else
             if (this.props.match.params.type === "video") {
-<<<<<<< HEAD
-                return <iframe src={this.state.post.videoUrl} className="ui image" title="post-title" />
-=======
                 return <iframe src={this.state.post.videoUrl} class="ui image" title="post-title"></iframe>
->>>>>>> cf1a25cf4d3af8807aa3ec820a5092127170dfb8
 
             } else {
                 return <p className="text-align-center">{this.state.post.text}</p>
@@ -98,9 +94,6 @@ class PostDetails extends Component {
                         <div className="extra content">
                         </div>
                     </div>
-<<<<<<< HEAD
-                    <div className="ui comments">
-=======
                     <div class="ui comments">
 
 
@@ -113,7 +106,6 @@ class PostDetails extends Component {
                         </form>
 
 
->>>>>>> cf1a25cf4d3af8807aa3ec820a5092127170dfb8
                         {this.state.commentList.map((comment) => {
 
                             return <div className="comment">
@@ -133,19 +125,18 @@ class PostDetails extends Component {
                                 
                             </div>
                         })}
-
-<<<<<<< HEAD
+                            {/* whole form was old code */}
                         <form className="ui reply form">
                             <div className="field">
                                 <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
                             </div>
                             <button className="ui icon primary left labeled button" onClick={this.sendComment}>
                                 <i aria-hidden="true" className="edit icon"></i>Add Comment</button>
+                             {/* next two lines were incoming change and out of the form  */}
+                            <button class="ui icon primary left labeled button" onClick={this.deletePost}>
+                            <i aria-hidden="true" class="edit icon"></i>Delete Post</button>
                         </form>
-=======
-<button class="ui icon primary left labeled button" onClick={this.deletePost}>
-                                <i aria-hidden="true" class="edit icon"></i>Delete Post</button>
->>>>>>> cf1a25cf4d3af8807aa3ec820a5092127170dfb8
+                        
 
                     </div>
                 </div>
