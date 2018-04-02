@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const FeedText = (props) => {
 
     return (
-        <Card as={Link} to={`/text/${props.post.id}`}>}>
+        <Card as={Link} to={`/text/${props.post.id}`}>
             <Card.Description><p>{props.post.text}</p></Card.Description>
             <Card.Content extra>
                 <a className='float-left'><i aria-hidden="true" className="file alternate outline icon"></i>Text post</a>

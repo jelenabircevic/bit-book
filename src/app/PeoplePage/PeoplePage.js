@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 import { Input, Grid } from 'semantic-ui-react'
 import { getData } from '../services/DataService';
 import PeopleList from './PeopleList';
+import { Pagination } from 'semantic-ui-react'
+
+
 
 class PeoplePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            activePage: 1,
             data: [],
             search: {
                 value: '',
                 result: []
             }
         };
+        this.paginationPeople=this.paginationPeople.bind(this)
+        this.handleInputChange=this.handleInputChange.bind(this)
+        this.handlePaginationChange=this.handlePaginationChange.bind(this)
     }
 
     filter = (e) => {
@@ -42,20 +49,32 @@ class PeoplePage extends Component {
             })
         })
     }
+    handleInputChange = (e, { value }) => this.setState({ activePage: value })
+
+    handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
+
+    paginationPeople () {
+        return  <Pagination activePage={this.state.activePage} defaultActivePage={1} totalPages={Math.ceil(this.state.search.result.length/2)} onPageChange={this.handlePaginationChange} />
+    }
+      
+
     render() {
         return (
+            <React.Fragment>
             <Grid>
                 <Grid.Row>
                     <Grid.Column width="four">
                     </Grid.Column>
                     <Grid.Column width="eight">
                         {this.searchUsers()}
-                        < PeopleList data={this.state.search.result} />
+                        < PeopleList  data={this.state.search.result.slice((this.state.activePage-1)*2, 2*this.state.activePage)}  />
                     </Grid.Column>
                     <Grid.Column width="four">
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
+            {this.paginationPeople()}
+            </React.Fragment>
         );
     }
 }

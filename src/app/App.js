@@ -12,7 +12,7 @@ import PostDetails from './PostDetails/PostDetails';
 class App extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <NavHeader />
         <Switch>
           <Route path='/feed' component={FeedPage} />
@@ -23,7 +23,7 @@ class App extends Component {
           <Redirect from='/' to='/feed' />
         </Switch>
         <Footer />
-      </div>
+        </React.Fragment>
 
     );
   }
