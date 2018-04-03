@@ -5,6 +5,7 @@ import { PostVideo, PostText, PostImage } from '../models/TextPost'
 import User from '../models/User'
 import Comment from '../models/Comment';
 
+const sessionId = sessionStorage.getItem('sessionId');
 
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData {
@@ -13,8 +14,8 @@ class FetchData {
             const users = await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl}/users`,
                 method: 'get',
@@ -34,8 +35,8 @@ class FetchData {
             const user = await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl}/users/${id}`,
                 method: 'get',
@@ -53,8 +54,8 @@ class FetchData {
         let request = new Request(requestUrl + url, {
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Key': 'bitbook',
-                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                'Key': '5256EE4',
+                'SessionId': sessionId
             }),
             method: method
 
@@ -176,8 +177,8 @@ class PostData {
             const post = await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl}/TextPosts`,
                 method: 'post',
@@ -198,8 +199,8 @@ class PostData {
             return await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl}/ImagePosts`,
                 method: 'post',
@@ -220,8 +221,8 @@ class PostData {
             return await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl}/VideoPosts`,
                 method: 'post',
@@ -241,8 +242,8 @@ class PostData {
             return await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl + '/Comments'}/TextPosts`,
                 method: 'post',
@@ -263,8 +264,8 @@ class PostData {
             return await axios({
                 headers: {
                     'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                    'Key': '5256EE4',
+                    'SessionId': sessionId
                 },
                 url: `${requestUrl}/Profiles`,
                 method: 'put',
@@ -283,14 +284,68 @@ class PostData {
         formData.append('file', file)
         const config = {
             headers: {
-                    'Content-Type': 'application/json',
-                    'Key': 'bitbook',
-                    'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                'Content-Type': 'application/json',
+                'Key': '5256EE4',
+                'SessionId': sessionId
             }
         }
         return axios.post(url, formData, config)
     }
 
+    userRegister(user, pass) {
+        return axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': '5256EE4',
+            },
+            url: `${requestUrl}/register`,
+            method: 'post',
+            data: {
+                username: user,
+                password: pass,
+                name: user,
+                email: `${user}@gmail.com`
+                // 664
+            }
+        })
+            .then(result => {
+                console.log(result.status);
+                return result
+            })
+            .catch(error => {
+                // console.log(error.response.data.error.message)
+                // console.log(JSON.stringify(error));
+                return error.response.data.error.message
+            })
+
+
+    }
+
+    userLogin(user, pass){
+        return axios({
+            headers: {
+                'Content-Type': 'application/json',
+                'Key': '5256EE4',
+            },
+            url: `${requestUrl}/login`,
+            method: 'post',
+            data: {
+                username: user,
+                password: pass,
+            }
+        })
+            .then(result => {
+                console.log(result);
+                sessionStorage.setItem('sessionId', result.data.sessionId);
+                sessionStorage.setItem('user', JSON.stringify(result.data));
+                return result
+            })
+            .catch(error => {
+                // console.log(error.response.data.error.message)
+                // console.log(JSON.stringify(error));
+                return error.response.data.error.message
+            })
+        }
 }
 
 export const postData = new PostData();
@@ -301,8 +356,8 @@ class DeleteData {
         return axios({
             headers: {
                 'Content-Type': 'application/json',
-                'Key': 'bitbook',
-                'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+                'Key': '5256EE4',
+                'SessionId': sessionId
             },
             url: `${requestUrl}/Posts/${id}`,
             method: 'delete',
@@ -313,8 +368,8 @@ class DeleteData {
     //     return axios({
     //         headers: {
     //             'Content-Type': 'application/json',
-    //             'Key': 'bitbook',
-    //             'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+    //             'Key': '5256EE4',
+    //             'SessionId': sessionId
     //         },
     //         url: `${requestUrl}/Comments/${id}`,
     //         method: 'delete',
@@ -323,5 +378,7 @@ class DeleteData {
     // }
 
 }
+
+
 
 export const deleteData = new DeleteData();
