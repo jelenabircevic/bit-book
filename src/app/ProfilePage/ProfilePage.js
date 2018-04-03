@@ -83,7 +83,7 @@ class ProfilePage extends Component {
             return
         }
         if (this.state.nameLength > 30) {
-            this.setState({ errorLength: 'Name must be shorter than 30 letters!' })
+            this.setState({ errorLength: "Name shouldn't exceed 30 letters!" })
             return
         }
         if (this.state.file) {

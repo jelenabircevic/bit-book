@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getData,deleteData, postData } from '../services/DataService'
+import { getData, deleteData, postData } from '../services/DataService'
+import TimeAgo from 'react-timeago'
 
 // import _ from 'lodash';
 
@@ -97,7 +98,7 @@ class PostDetails extends Component {
                     <div class="ui comments">
 
 
-                    <form class="ui reply form">
+                        <form class="ui reply form">
                             <div class="field">
                                 <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
                             </div>
@@ -115,28 +116,28 @@ class PostDetails extends Component {
                                 <div className="content">
                                     <div className="author">Joe Henderson</div>
                                     <div className="metadata">
-                                        <div>1 day ago</div>
+                                        <div><TimeAgo date={new Date(comment.dateCreated + 'z')} /></div>
                                     </div>
                                     <div className="text">
                                         <p>{comment.body}</p>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                         })}
-                            {/* whole form was old code */}
-                        <form className="ui reply form">
+                        {/* whole form was old code */}
+                        {/* <form className="ui reply form">
                             <div className="field">
                                 <textarea id="commentInput" rows="3" onChange={this.handleChange}> </textarea>
-                            </div>
-                            <button className="ui icon primary left labeled button" onClick={this.sendComment}>
-                                <i aria-hidden="true" className="edit icon"></i>Add Comment</button>
-                             {/* next two lines were incoming change and out of the form  */}
-                            <button class="ui icon primary left labeled button" onClick={this.deletePost}>
+                            </div> */}
+                        {/* <button className="ui icon primary left labeled button" onClick={this.sendComment}>
+                                <i aria-hidden="true" className="edit icon"></i>Add Comment</button> */}
+                        {/* next two lines were incoming change and out of the form  */}
+                        <button class="ui icon primary left labeled button" onClick={this.deletePost}>
                             <i aria-hidden="true" class="edit icon"></i>Delete Post</button>
-                        </form>
-                        
+                        {/* </form> */}
+
 
                     </div>
                 </div>
@@ -146,4 +147,3 @@ class PostDetails extends Component {
 }
 
 export default PostDetails;
- 
