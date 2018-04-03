@@ -12,9 +12,12 @@ class FeedList extends Component {
         super(props);
         this.state = {
             postList: [],
+            topMargin: "100px",
             filteredList: [],
-            infiniteControl: 9
+            infiniteControl:15,
+            dimensions: {},  // adjusting image modal top margin
         };
+        this.onImgLoad = this.onImgLoad.bind(this);
     }
 
     renderFeed() {
@@ -32,7 +35,7 @@ class FeedList extends Component {
                 newPostList.push(element)
             }
         });
-        this.setState({ filteredList: newPostList });        
+        this.setState({ filteredList: newPostList });
     }
 
     showImages = () => {
@@ -47,7 +50,7 @@ class FeedList extends Component {
     }
 
     showAll = () => {
-        this.setState({ filteredList: this.state.postList });
+        this.setState(prevState => ({ filteredList: prevState.postList }));
     }
 
     showTexts = () => {
@@ -70,7 +73,7 @@ class FeedList extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.filteredList, nextState.filteredList) && (nextState.infiniteControl === this.state.infiniteControl)) {
+        if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.filteredList, nextState.filteredList) && (nextState.infiniteControl === this.state.infiniteControl)&&(nextState.topMargin === this.state.topMargin)) {
             return false;
         }
         return true;
@@ -78,7 +81,7 @@ class FeedList extends Component {
     componentWillUnmount() {
         window.removeEventListener('scroll', this.onScroll, false);
     }
-    
+
     map = (post) => {
         if (post.type == "video") {
             return <Link to={`/${post.type}/${post.id}`}><FeedVideo post={post} /></Link>
@@ -86,40 +89,46 @@ class FeedList extends Component {
             if (post.type == "text") {
                 return <FeedText post={post} />
             } else {
-                return <FeedImage post={post} />
+                console.log(this.state.topMargin);
+                return <FeedImage post={post} onLoad={this.onImgLoad} src={this.props.src} dimensions={this.state.dimensions} topMargin={this.state.topMargin} />
             }
     }
 
-    onScroll = () => {
-        if ((window.innerHeight + window.scrollY) >= (document.getElementById('root').offsetHeight - 200) && this.state.filteredList.length) {
-            console.log(window.innerHeight);
-            console.log(window.scrollY);
-            console.log(document.getElementById('root').offsetHeight);
-            console.log('scroll');
-            this.setState((prevState, props) => {
-                return {infiniteControl: (prevState.infiniteControl+3)}
+    onScroll = () => {  // 
+        if ((window.innerHeight + window.scrollY) >= (document.getElementById('root').offsetHeight - 200) && this.state.filteredList.length > 8) {
+            this.setState((prevState) => {
+                return { infiniteControl: prevState.infiniteControl + 3 }
             })
         }
-    }  
-
-
-    render() {
-        return (
-            <div className="container fluid">
-                <div className="row">
-                    {/* {console.log(this.state.postList)} */}
-                    <div>
-                        <button class="ui red basic button" role="button" onClick={this.showVideos}>Show Videos</button>
-                        <button class="ui orange basic button" role="button" onClick={this.showImages}>Show Images</button>
-                        <button class="ui yellow basic button" role="button" onClick={this.showTexts}>Show Texts</button>
-                        <button class="ui blue basic button" role="button" onClick={this.showAll}>Show All</button>
-                        
-                    </div>
-                    {this.state.filteredList.slice(0, this.state.infiniteControl).map(this.map)}
-                </div>
-            </div>
-        );
     }
-}
+    async onImgLoad({ target: img }) {    // adjusting image modal top margin
+        await this.setState({
+            dimensions: {
+                height: img.offsetHeight,
+                width: img.offsetWidth
+            }
+        });
+        this.setState ({topMargin : (window.innerHeight - this.state.dimensions.height)/2 +"px"})
+        
+    }
 
-export default FeedList;
+        render() {
+            return (
+                <div className="container fluid">
+                    <div className="row">
+                        {/* {console.log(this.state.postList)} */}
+                        <div className='text-align-center'>
+                            <button class="ui red basic button" role="button" onClick={this.showVideos}>Show Videos</button>
+                            <button class="ui orange basic button" role="button" onClick={this.showImages}>Show Images</button>
+                            <button class="ui yellow basic button" role="button" onClick={this.showTexts}>Show Texts</button>
+                            <button class="ui blue basic button" role="button" onClick={this.showAll}>Show All</button>
+
+                        </div>
+                        {this.state.filteredList.slice(0, this.state.infiniteControl).map(this.map)}
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    export default FeedList;

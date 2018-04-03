@@ -58,3 +58,6 @@ a {
 .text-align-center {
   text-align: center;
 }
+div.ui.card.feed>div.extra.content {
+  display:none;
+}
