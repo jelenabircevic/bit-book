@@ -71,8 +71,6 @@ class FetchData {
                 return response.json();
             })
             .then(function (result) {
-
-                result.splice(20);
                 return result.map(post => {
 
                     if (post.type === 'video') {

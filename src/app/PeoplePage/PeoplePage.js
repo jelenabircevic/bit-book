@@ -54,7 +54,7 @@ class PeoplePage extends Component {
     handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
 
     paginationPeople () {
-        return  <Pagination activePage={this.state.activePage} defaultActivePage={1} totalPages={Math.ceil(this.state.search.result.length/2)} onPageChange={this.handlePaginationChange} />
+        return  <Pagination activePage={this.state.activePage} defaultActivePage={1} totalPages={Math.ceil(this.state.search.result.length/6)} onPageChange={this.handlePaginationChange} />
     }
       
 
@@ -67,7 +67,7 @@ class PeoplePage extends Component {
                     </Grid.Column>
                     <Grid.Column width="eight">
                         {this.searchUsers()}
-                        < PeopleList  data={this.state.search.result.slice((this.state.activePage-1)*2, 2*this.state.activePage)}  />
+                        < PeopleList  data={this.state.search.result.slice((this.state.activePage-1)*6, 6*this.state.activePage)}  />
                     </Grid.Column>
                     <Grid.Column width="four">
                     </Grid.Column>

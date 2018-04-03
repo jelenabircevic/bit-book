@@ -14,7 +14,7 @@ class FeedList extends Component {
             postList: [],
             topMargin: "100px",
             filteredList: [],
-            infiniteControl: 9,
+            infiniteControl:15,
             dimensions: {},  // adjusting image modal top margin
         };
         this.onImgLoad = this.onImgLoad.bind(this);
@@ -50,7 +50,7 @@ class FeedList extends Component {
     }
 
     showAll = () => {
-        this.setState({ filteredList: this.state.postList });
+        this.setState(prevState => ({ filteredList: prevState.postList }));
     }
 
     showTexts = () => {
