@@ -354,21 +354,24 @@ class PostData {
                 password: pass,
             }
         })
-            .then(result => {
-                console.log(result);
-                sessionStorage.setItem('sessionId', result.data.sessionId);
-                getData.getProfile();
-                return result
-            })
-            .catch(error => {
-                // console.log(error.response.data.error.message)
-                // console.log(JSON.stringify(error));
-                return error.response.data.error.message
-            })
+        .then(result => {
+            console.log(result);
+            sessionStorage.setItem('sessionId', result.data.sessionId);
+            getData.getProfile();
+            return result
+        })
+        .catch(error => {
+            // console.log(error.response.data.error.message)
+            // console.log(JSON.stringify(error));
+            return error.response.data.error.message
+        })
+
+
         }
 }
 
 export const postData = new PostData();
+
 
 class DeleteData {
 

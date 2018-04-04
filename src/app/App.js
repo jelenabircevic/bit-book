@@ -21,11 +21,16 @@ class App extends Component {
   onLogin = () => {
     this.setState({loggedIn: sessionStorage.getItem('sessionId')});
   }
+  
+  onLogout = () => {
+    sessionStorage.clear();
+    this.setState({loggedIn: sessionStorage.getItem('sessionId')});
+  }
 
   render() {
     return (
       <React.Fragment>
-        <NavHeader />
+        <NavHeader onLogout={this.onLogout}/>
           {!this.state.loggedIn ?
           <Switch>
             <Route exact path='/login' render={() => <LoginPage onLogin={this.onLogin}/>} />
