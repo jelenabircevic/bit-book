@@ -6,11 +6,18 @@ import FeedVideo from './FeedVideo';
 import FeedText from './FeedText';
 import FeedImage from './FeedImage';
 import { Link } from 'react-router-dom';
+import Loader from '../partials/Loader'
 
 class FeedList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            show: {
+                all: "",
+                texts: "basic",
+                images: "basic",
+                videos: "basic"
+            },
             postList: [],
             topMargin: "100px",
             filteredList: [],
@@ -21,11 +28,13 @@ class FeedList extends Component {
     }
 
     renderFeed() {
+        if (sessionStorage.getItem('sessionId')) {
         getData.fetchPosts()
-            .then((result) => {
+        .then((result) => {
                 this.setState({ postList: result })
                 this.setState({ filteredList: result })
             })
+        }
     }
 
     showVideos = () => {
@@ -35,7 +44,15 @@ class FeedList extends Component {
                 newPostList.push(element)
             }
         });
-        this.setState({ filteredList: newPostList });
+        this.setState({ 
+            filteredList: newPostList,
+            show: {
+                all: "basic",
+                texts: "basic",
+                images: "basic",
+                videos: ""
+            },
+         });
     }
 
     showImages = () => {
@@ -46,11 +63,27 @@ class FeedList extends Component {
                 newPostList.push(element)
             }
         });
-        this.setState({ filteredList: newPostList });
+        this.setState({ 
+            filteredList: newPostList,
+            show: {
+                all: "basic",
+                texts: "basic",
+                images: "",
+                videos: "basic"
+            },
+         });
     }
 
     showAll = () => {
-        this.setState(prevState => ({ filteredList: prevState.postList }));
+        this.setState(prevState => ({ 
+            filteredList: prevState.postList,
+            show: {
+                all: "",
+                texts: "basic",
+                images: "basic",
+                videos: "basic"
+            },
+         }));
     }
 
     showTexts = () => {
@@ -60,7 +93,15 @@ class FeedList extends Component {
                 newPostList.push(element)
             }
         });
-        this.setState({ filteredList: newPostList });
+        this.setState({ 
+            filteredList: newPostList,
+            show: {
+                all: "basic",
+                texts: "",
+                images: "basic",
+                videos: "basic"
+            },
+         });
     }
 
     componentDidMount() {
@@ -72,12 +113,12 @@ class FeedList extends Component {
         this.renderFeed()
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    /* shouldComponentUpdate(nextProps, nextState) {
         if ((nextProps.reRender === this.props.reRender) && _.isEqual(this.state.filteredList, nextState.filteredList) && (nextState.infiniteControl === this.state.infiniteControl)&&(nextState.topMargin === this.state.topMargin)) {
             return false;
         }
         return true;
-    }
+    } */
     componentWillUnmount() {
         window.removeEventListener('scroll', this.onScroll, false);
     }
@@ -118,13 +159,16 @@ class FeedList extends Component {
                     <div className="row">
                         {/* {console.log(this.state.postList)} */}
                         <div className='text-align-center'>
-                            <button class="ui red basic button" role="button" onClick={this.showVideos}>Show Videos</button>
-                            <button class="ui orange basic button" role="button" onClick={this.showImages}>Show Images</button>
-                            <button class="ui yellow basic button" role="button" onClick={this.showTexts}>Show Texts</button>
-                            <button class="ui blue basic button" role="button" onClick={this.showAll}>Show All</button>
+                            <button class={`ui teal button ${this.state.show.images}`} role="button" onClick={this.showImages}>Show Images</button>
+                            <button class={`ui red button ${this.state.show.texts}`} role="button" onClick={this.showTexts}>Show Texts</button>
+                            <button class={`ui yellow button ${this.state.show.videos}`} role="button" onClick={this.showVideos}>Show Videos</button>
+                            <button class={`ui orange button ${this.state.show.all}`} role="button" onClick={this.showAll}>Show All</button>
 
                         </div>
-                        {this.state.filteredList.slice(0, this.state.infiniteControl).map(this.map)}
+                        {_.isEmpty(this.state.filteredList) ?
+                        <Loader /> :
+                        this.state.filteredList.slice(0, this.state.infiniteControl).map(this.map)
+                        }
                     </div>
                 </div>
             );

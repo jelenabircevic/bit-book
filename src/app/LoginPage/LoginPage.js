@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Form, Button, Tab } from 'semantic-ui-react';
-import { postData } from '../services/DataService'
+import { postData, getData } from '../services/DataService'
 
 class LoginPage extends Component {
     constructor(props) {

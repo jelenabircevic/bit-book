@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   onLogin = () => {
-    this.setState({loggedIn: sessionStorage.getItem('sessionId')})
+    this.setState({loggedIn: sessionStorage.getItem('sessionId')});
   }
 
   render() {
@@ -34,9 +34,10 @@ class App extends Component {
           <Switch>
             <Route path='/feed' component={FeedPage} />
             <Route exact path='/people' component={PeoplePage} />
+            <Redirect from={`/people/${sessionStorage.getItem('userId')}`} to='/profile' />
             <Route path='/people/:id' component={ProfilePage} />
             <Route path='/:type/:id' component={PostDetails} />
-            <Redirect from='/profile' to='/people/391' />
+            <Route exact path='/profile' component={ProfilePage} />
             <Redirect from='/' to='/feed' />
           </Switch> }
         <Footer />

@@ -15,7 +15,7 @@ class FetchData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl}/users`,
                 method: 'get',
@@ -36,7 +36,7 @@ class FetchData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl}/users/${id}`,
                 method: 'get',
@@ -50,12 +50,32 @@ class FetchData {
         }
     }
 
+    async getProfile() {
+        try {
+            const profile = await axios({
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Key': '5256EE4',
+                    'SessionId': sessionStorage.getItem('sessionId')
+                },
+                url: `${requestUrl}/profile`,
+                method: 'get',
+            });
+            console.log(profile.data.userId);
+            sessionStorage.setItem('userId', profile.data.userId)
+            return new User(profile.data)
+        }
+        catch (error) {
+            return error;
+        }
+    }
+
     createRequest(url, method) {
         let request = new Request(requestUrl + url, {
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Key': '5256EE4',
-                'SessionId': sessionId
+                'SessionId': sessionStorage.getItem('sessionId')
             }),
             method: method
 
@@ -178,7 +198,7 @@ class PostData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl}/TextPosts`,
                 method: 'post',
@@ -200,7 +220,7 @@ class PostData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl}/ImagePosts`,
                 method: 'post',
@@ -222,7 +242,7 @@ class PostData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl}/VideoPosts`,
                 method: 'post',
@@ -243,7 +263,7 @@ class PostData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl + '/Comments'}/TextPosts`,
                 method: 'post',
@@ -265,7 +285,7 @@ class PostData {
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
-                    'SessionId': sessionId
+                    'SessionId': sessionStorage.getItem('sessionId')
                 },
                 url: `${requestUrl}/Profiles`,
                 method: 'put',
@@ -286,7 +306,7 @@ class PostData {
             headers: {
                 'Content-Type': 'application/json',
                 'Key': '5256EE4',
-                'SessionId': sessionId
+                'SessionId': sessionStorage.getItem('sessionId')
             }
         }
         return axios.post(url, formData, config)
@@ -337,7 +357,7 @@ class PostData {
             .then(result => {
                 console.log(result);
                 sessionStorage.setItem('sessionId', result.data.sessionId);
-                sessionStorage.setItem('user', JSON.stringify(result.data));
+                getData.getProfile();
                 return result
             })
             .catch(error => {
@@ -357,7 +377,7 @@ class DeleteData {
             headers: {
                 'Content-Type': 'application/json',
                 'Key': '5256EE4',
-                'SessionId': sessionId
+                'SessionId': sessionStorage.getItem('sessionId')
             },
             url: `${requestUrl}/Posts/${id}`,
             method: 'delete',

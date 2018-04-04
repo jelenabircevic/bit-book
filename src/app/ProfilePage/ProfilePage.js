@@ -107,10 +107,26 @@ class ProfilePage extends Component {
     }
 
     componentDidMount() {
-        getData.getUser(this.props.match.params.id)
-            .then((result) => {
-                this.setState({ user: result })
-            })
+        this.getInfo(this.props)
+    }
+
+   
+    componentWillReceiveProps(nextProps) {
+        this.getInfo(nextProps)
+    }
+
+    getInfo(p){
+        if (p.match.path === '/profile') {
+            getData.getProfile()
+                .then(result => {
+                    this.setState({ user: result })
+                })
+        } else {
+            getData.getUser(p.match.params.id)
+                .then((result) => {
+                    this.setState({ user: result })
+                })
+        }
     }
 
     render() {
@@ -140,7 +156,9 @@ class ProfilePage extends Component {
                                 <Image style={{ width: 'inherit' }} src={this.state.user.avatarUrl} />
                                 <Card.Content>
                                     <Card.Header className="float-left" size="large">{this.state.user.name}</Card.Header>
-                                    <Button className="float-right" basic color="grey" size="mini" onClick={this.show('small')}>Edit profile</Button>
+                                    {(this.props.match.path === '/profile') ?
+                                        <Button className="float-right" basic color="grey" size="mini" onClick={this.show('small')}>Edit profile</Button> :
+                                        <React.Fragment />}
                                     <Card.Description>{this.state.user.about}</Card.Description>
                                 </Card.Content>
                                 <Card.Content extra>
