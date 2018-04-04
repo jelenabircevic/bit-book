@@ -31,8 +31,10 @@ class FeedList extends Component {
         if (sessionStorage.getItem('sessionId')) {
         getData.fetchPosts()
         .then((result) => {
-                this.setState({ postList: result })
-                this.setState({ filteredList: result })
+                this.setState({
+                    postList: result,
+                    filteredList: result
+                })
             })
         }
     }
