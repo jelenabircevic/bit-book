@@ -134,8 +134,10 @@ class PostDetails extends Component {
                         {/* <button className="ui icon primary left labeled button" onClick={this.sendComment}>
                                 <i aria-hidden="true" className="edit icon"></i>Add Comment</button> */}
                         {/* next two lines were incoming change and out of the form  */}
+                        {(this.state.post.userId == sessionStorage.getItem('userId')) ?
                         <button class="ui icon primary left labeled button" onClick={this.deletePost}>
-                            <i aria-hidden="true" class="edit icon"></i>Delete Post</button>
+                            <i aria-hidden="true" class="edit icon"></i>Delete Post</button> :
+                            <React.Fragment /> }
                         {/* </form> */}
 
 
