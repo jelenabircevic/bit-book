@@ -1,11 +1,7 @@
-
-import React from 'react';
 import axios from 'axios';
 import { PostVideo, PostText, PostImage } from '../models/TextPost'
 import User from '../models/User'
 import Comment from '../models/Comment';
-
-const sessionId = sessionStorage.getItem('sessionId');
 
 const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
 class FetchData {
@@ -194,7 +190,7 @@ export const getData = new FetchData();
 class PostData {
     async postText(data) {
         try {
-            const post = await axios({
+            await axios({
                 headers: {
                     'Content-Type': 'application/json',
                     'Key': '5256EE4',
