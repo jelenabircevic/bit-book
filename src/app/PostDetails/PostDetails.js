@@ -71,7 +71,7 @@ class PostDetails extends Component {
     printPost() {
 
         if (this.props.match.params.type === "image") {
-            return <img src={this.state.post.imageUrl} className="ui image" alt="post-pic" />
+            return <img style={{width: 'inherit'}} src={this.state.post.imageUrl} className="ui image" alt="post-pic" />
         } else
             if (this.props.match.params.type === "video") {
                 return <iframe src={this.state.post.videoUrl} class="ui image" title="post-title"></iframe>
