@@ -1,4 +1,4 @@
-BitBook
+<b>BitBook</b>
 
 Simple Facebook-like single page app, written in React.js, as a final team project for the JavaScript course at BIT.
 
