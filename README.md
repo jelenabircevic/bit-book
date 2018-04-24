@@ -1,4 +1,6 @@
-<b>BitBook</b>
+## BitBook
+
+Check out the project here: [BitBook](https://jelenabircevic.github.io/bit-book) (use 'user' and 'pass' for looking around the app)
 
 Simple Facebook-like single page app, written in React.js, as a final team project for the JavaScript course at BIT.
 
