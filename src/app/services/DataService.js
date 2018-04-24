@@ -3,7 +3,7 @@ import { PostVideo, PostText, PostImage } from '../models/TextPost'
 import User from '../models/User'
 import Comment from '../models/Comment';
 
-const requestUrl = 'http://bitbookapi.azurewebsites.net/api';
+const requestUrl = 'https://bitbookapi.azurewebsites.net/api';
 class FetchData {
     async getUsers() {
         try {
